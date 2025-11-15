@@ -67,14 +67,16 @@ Committed to upholding industry best practices in design and documentation. Pass
               </p>
 
               <div className="flex gap-4 pt-8">
-                <motion.button
+                <motion.a
+                  href="/david-agbugba-cv.pdf"
+                  download
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-lg font-semibold hover:shadow-lg transition-all"
                 >
                   <Download className="w-5 h-5" />
                   Download CV
-                </motion.button>
+                </motion.a>
                 <motion.a
                   href="#contact"
                   whileHover={{ scale: 1.05 }}
