@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { FileText, Download, Mail } from "lucide-react";
+import { Download, Mail } from "lucide-react";
 
 export default function About() {
   const aboutText = `I'm a seasoned Software Developer with 5+ years of extensive proficiency in JavaScript and PHP. Specialized in building startup applications, excelling in code optimization, debugging, and providing strategic solutions.
