@@ -104,7 +104,7 @@ export default function Contact() {
               Get In Touch
             </span>
             <h2 className="text-5xl md:text-6xl font-bold text-white mt-4">
-              Let's Create Something
+              Let&apos;s Create Something
               <span className="block text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400">
                 Amazing Together
               </span>

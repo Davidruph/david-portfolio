@@ -125,7 +125,8 @@ export default function Footer() {
               </a>
             </motion.button>
             <p className="text-gray-400 text-xs">
-              Have a project? Let's collaborate and create something amazing.
+              Have a project? Let&apos;s collaborate and create something
+              amazing.
             </p>
           </motion.div>
         </div>
