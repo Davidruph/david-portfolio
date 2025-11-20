@@ -106,7 +106,7 @@ export default function Projects() {
 
   return (
     <section
-      id="project"
+      id="projects"
       className="relative min-h-screen py-32 px-4 bg-gradient-to-b from-slate-900 to-slate-950 overflow-hidden"
     >
       <div className="max-w-7xl mx-auto">
