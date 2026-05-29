@@ -1,192 +1,170 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { Calendar, MapPin, ChevronRight } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { useState } from "react";
+import { Calendar, MapPin, ChevronDown } from "lucide-react";
+
+const EXPERIENCES = [
+  {
+    title:    "Software Architect & Team Lead",
+    company:  "Techvibes International Limited",
+    location: "FCT Abuja, Nigeria",
+    duration: "Dec 2022 – Present",
+    description:
+      "Led product updates, supervised interns, and delivered performant user interfaces. Built scalable applications including a school management system and subscription platform. Collaborated on API integrations, performed code reviews, and implemented optimised SQL queries and unit tests.",
+    highlights: ["Product Engineering", "Team Leadership", "Data Architecture", "Subscription Systems"]
+  },
+  {
+    title:    "Frontend Developer",
+    company:  "Oaks Intelligence Limited",
+    location: "Lagos, Nigeria",
+    duration: "Sep 2023 – Aug 2024",
+    description:
+      "Implemented pixel-perfect UI components and collaborated on large-scale design projects. Built real-time validation algorithms, optimised reusable React modules, and developed React-based tools including an asset risk assessment system and a social platform with AI integration.",
+    highlights: ["UI Engineering", "React & Next.js", "MERN Stack", "AI Integration"]
+  },
+  {
+    title:    "Full Stack Developer",
+    company:  "Fiverr (Freelance)",
+    location: "Remote",
+    duration: "May 2020 – Nov 2022",
+    description:
+      "Built full-stack applications for global clients, delivering intuitive UIs and reliable backend systems. Collaborated closely with clients, executed QA testing, and completed projects using Laravel, MERN Stack, and multiple database systems.",
+    highlights: ["Full-Stack Development", "Client Collaboration", "QA & Testing", "Database Design"]
+  }
+];
 
 export default function Experience() {
-  const experiences = [
-    {
-      title: "Software Architect & Team Lead",
-      company: "Techvibes International Limited",
-      location: "FCT Abuja, Nigeria",
-      duration: "Dec 2022 - Present",
-      description:
-        "Led product updates, supervised interns, and delivered performant user interfaces. Built scalable applications including a school management system and subscription platform. Collaborated on API integrations, performed code reviews, and implemented optimized SQL queries and unit tests.",
-      highlights: [
-        "Product Engineering",
-        "Team Leadership",
-        "Data Architecture",
-        "Subscription Systems"
-      ]
-    },
-    {
-      title: "Frontend Developer",
-      company: "Oaks Intelligence Limited",
-      location: "Lagos, Nigeria",
-      duration: "Sep 2023 - Aug 2024",
-      description:
-        "Implemented pixel-perfect UI components and collaborated on large-scale design projects. Built real-time validation algorithms, optimized reusable React modules, and developed React-based tools including an asset risk assessment system and a social platform with AI integration.",
-      highlights: [
-        "UI Engineering",
-        "React & Next.js",
-        "MERN Stack",
-        "AI Integration"
-      ]
-    },
-    {
-      title: "Full Stack Developer",
-      company: "Fiverr (Freelance)",
-      location: "Remote",
-      duration: "May 2020 - Nov 2022",
-      description:
-        "Built full-stack applications for global clients, delivering intuitive UIs and reliable backend systems. Collaborated closely with clients, executed QA testing, and completed projects using Laravel, MERN Stack, and multiple database systems.",
-      highlights: [
-        "Full-Stack Development",
-        "Client Collaboration",
-        "QA & Testing",
-        "Database Design"
-      ]
-    }
-  ];
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.15
-      }
-    }
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, x: -50 },
-    visible: {
-      opacity: 1,
-      x: 0,
-      transition: { duration: 0.6 }
-    }
-  };
+  const [open, setOpen] = useState<number | null>(0);
 
   return (
     <section
       id="experience"
-      className="relative min-h-screen py-24 px-4 bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 overflow-hidden"
+      className="relative py-28 px-4 bg-warm-900 overflow-hidden"
     >
-      <div className="max-w-5xl mx-auto">
-        {/* Animated background */}
-        <div className="absolute inset-0 pointer-events-none">
-          <motion.div
-            animate={{ opacity: [0.1, 0.25, 0.1] }}
-            transition={{ duration: 8, repeat: Infinity }}
-            className="absolute top-1/2 -right-40 w-96 h-96 bg-blue-500 rounded-full mix-blend-multiply filter blur-3xl"
-          />
-        </div>
+      {/* Ambient glow */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        <motion.div
+          animate={{ opacity: [0.07, 0.16, 0.07] }}
+          transition={{ duration: 10, repeat: Infinity }}
+          className="absolute top-1/2 -right-48 w-[440px] h-[440px] bg-amber-700 rounded-full blur-[130px]"
+        />
+      </div>
 
-        <div className="relative z-10">
-          {/* Header */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-            className="mb-16"
-          >
-            <span className="text-purple-400 font-semibold uppercase tracking-widest">
-              Work History
-            </span>
-            <h2 className="text-5xl md:text-6xl font-bold text-white mt-4">
-              Professional
-              <span className="block text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400">
-                Experience
-              </span>
-            </h2>
-          </motion.div>
+      <div className="relative z-10 max-w-4xl mx-auto">
+        {/* Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="mb-16"
+        >
+          <span className="text-amber-500 font-semibold uppercase tracking-widest text-sm">
+            Work History
+          </span>
+          <h2 className="text-5xl md:text-6xl font-bold text-warm-100 mt-4 leading-tight">
+            Professional
+            <span className="block text-amber-400">Experience</span>
+          </h2>
+        </motion.div>
 
-          {/* Timeline */}
-          <motion.div
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            className="space-y-8 relative"
-          >
-            {/* Timeline line */}
-            <div className="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-purple-500 via-pink-500 to-transparent rounded-full" />
+        {/* Timeline */}
+        <div className="relative space-y-4">
+          {/* Vertical line */}
+          <div className="absolute left-4 top-0 bottom-0 w-px bg-gradient-to-b from-amber-500/60 via-amber-500/20 to-transparent" />
 
-            {experiences.map((exp, idx) => (
+          {EXPERIENCES.map((exp, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.1, duration: 0.55 }}
+              className="pl-12 relative"
+            >
+              {/* Dot */}
               <motion.div
-                key={idx}
-                variants={itemVariants}
-                whileHover={{ x: 10 }}
-                className="pl-12 group cursor-pointer"
+                animate={{ scale: open === i ? 1.3 : 1 }}
+                className="absolute left-0 top-5 w-8 h-8 rounded-full bg-warm-800 border-2 border-amber-500/60 flex items-center justify-center"
               >
-                {/* Timeline dot */}
-                <motion.div
-                  initial={{ scale: 1 }}
-                  whileHover={{ scale: 1.3 }}
-                  className="absolute -left-3.5 top-2 w-7 h-7 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full border-4 border-slate-950 group-hover:shadow-lg group-hover:shadow-purple-500/50 transition-all"
-                />
-
-                {/* Content card */}
-                <div className="p-6 rounded-xl bg-gradient-to-r from-slate-800/50 to-slate-700/50 border border-purple-500/20 group-hover:border-purple-500/50 transition-all backdrop-blur-sm">
-                  <div className="flex items-start justify-between mb-4">
-                    <div>
-                      <h3 className="text-2xl font-bold text-white group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-purple-400 group-hover:to-pink-400 transition-all">
-                        {exp.title}
-                      </h3>
-                      <p className="text-purple-400 font-semibold mt-1">
-                        {exp.company}
-                      </p>
-                    </div>
-                    <motion.div whileHover={{ x: 5 }}>
-                      <ChevronRight className="w-6 h-6 text-purple-400 group-hover:translate-x-1 transition-transform" />
-                    </motion.div>
-                  </div>
-
-                  <div className="flex flex-col md:flex-row gap-4 mb-4 text-sm text-gray-400">
-                    <div className="flex items-center gap-2">
-                      <Calendar className="w-4 h-4 text-purple-400" />
-                      <span>{exp.duration}</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <MapPin className="w-4 h-4 text-purple-400" />
-                      <span>{exp.location}</span>
-                    </div>
-                  </div>
-
-                  <p className="text-gray-300 mb-4">{exp.description}</p>
-
-                  {/* Highlights */}
-                  <div className="flex flex-wrap gap-2">
-                    {exp.highlights.map((highlight) => (
-                      <motion.span
-                        key={highlight}
-                        whileHover={{ scale: 1.05, y: -2 }}
-                        className="px-3 py-1 bg-purple-500/20 text-purple-300 rounded-full text-xs font-medium border border-purple-500/30 hover:border-purple-500/60 transition-colors cursor-default"
-                      >
-                        {highlight}
-                      </motion.span>
-                    ))}
-                  </div>
-                </div>
+                <div className={`w-2 h-2 rounded-full transition-colors ${open === i ? "bg-amber-400" : "bg-warm-500"}`} />
               </motion.div>
-            ))}
-          </motion.div>
 
-          {/* Bottom accent */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.5 }}
-            viewport={{ once: true }}
-            className="mt-16 text-center"
-          >
-            <p className="text-gray-400">
-              More opportunities available • Open to collaboration
-            </p>
-          </motion.div>
+              {/* Card */}
+              <div
+                className={`rounded-2xl border transition-all cursor-pointer ${
+                  open === i
+                    ? "bg-warm-800 border-amber-500/50"
+                    : "bg-warm-800/60 border-warm-600 hover:border-amber-500/30"
+                }`}
+                onClick={() => setOpen(open === i ? null : i)}
+              >
+                {/* Always-visible summary */}
+                <div className="p-6 flex items-start justify-between gap-4">
+                  <div>
+                    <h3 className={`text-xl font-bold transition-colors ${open === i ? "text-amber-400" : "text-warm-100"}`}>
+                      {exp.title}
+                    </h3>
+                    <p className="text-amber-500/80 font-medium mt-0.5 text-sm">{exp.company}</p>
+
+                    <div className="flex flex-wrap gap-4 mt-3 text-xs text-warm-500">
+                      <span className="flex items-center gap-1.5">
+                        <Calendar className="w-3.5 h-3.5 text-amber-500/70" />
+                        {exp.duration}
+                      </span>
+                      <span className="flex items-center gap-1.5">
+                        <MapPin className="w-3.5 h-3.5 text-amber-500/70" />
+                        {exp.location}
+                      </span>
+                    </div>
+                  </div>
+
+                  <motion.div animate={{ rotate: open === i ? 180 : 0 }} transition={{ duration: 0.25 }}>
+                    <ChevronDown className="w-5 h-5 text-warm-500 mt-1 flex-shrink-0" />
+                  </motion.div>
+                </div>
+
+                {/* Expandable detail */}
+                <AnimatePresence initial={false}>
+                  {open === i && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.3 }}
+                      className="overflow-hidden"
+                    >
+                      <div className="px-6 pb-6 border-t border-warm-600/60 pt-4 space-y-4">
+                        <p className="text-warm-300 text-sm leading-relaxed">{exp.description}</p>
+                        <div className="flex flex-wrap gap-2">
+                          {exp.highlights.map((h) => (
+                            <span
+                              key={h}
+                              className="px-3 py-1 text-xs font-medium bg-amber-500/10 text-amber-300 border border-amber-500/30 rounded-full"
+                            >
+                              {h}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+            </motion.div>
+          ))}
         </div>
+
+        <motion.p
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.4 }}
+          className="mt-12 text-warm-500 text-sm text-center"
+        >
+          Open to exciting opportunities · Remote &amp; On-site
+        </motion.p>
       </div>
     </section>
   );

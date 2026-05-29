@@ -45,7 +45,19 @@ module.exports = {
         },
         input: "hsl(var(--input))",
         border: "hsl(var(--border))",
-        ring: "hsl(var(--ring))"
+        ring: "hsl(var(--ring))",
+        warm: {
+          950: "#0f0b08",
+          900: "#1a1410",
+          800: "#221a12",
+          700: "#2e2318",
+          600: "#3d2e1e",
+          500: "#6b5040",
+          400: "#a8917a",
+          300: "#c4b49f",
+          200: "#e0d5c8",
+          100: "#f5f0eb"
+        }
       },
       backgroundImage: {
         gradialRadial: "radial-gradient(var(--tw-gradient-stops))",
@@ -55,7 +67,7 @@ module.exports = {
       animation: {
         "fade-in": "fadeIn 0.5s ease-in",
         "slide-up": "slideUp 0.5s ease-out",
-        glow: "glow 2s ease-in-out infinite",
+        glow: "amberGlow 2s ease-in-out infinite",
         float: "float 3s ease-in-out infinite"
       },
       keyframes: {
@@ -67,9 +79,9 @@ module.exports = {
           "0%": { transform: "translateY(20px)", opacity: "0" },
           "100%": { transform: "translateY(0)", opacity: "1" }
         },
-        glow: {
-          "0%, 100%": { boxShadow: "0 0 20px rgba(59, 130, 246, 0.5)" },
-          "50%": { boxShadow: "0 0 40px rgba(59, 130, 246, 0.8)" }
+        amberGlow: {
+          "0%, 100%": { boxShadow: "0 0 20px rgba(245, 158, 11, 0.3)" },
+          "50%": { boxShadow: "0 0 40px rgba(245, 158, 11, 0.6)" }
         },
         float: {
           "0%, 100%": { transform: "translateY(0px)" },

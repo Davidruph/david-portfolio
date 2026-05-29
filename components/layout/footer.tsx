@@ -1,100 +1,87 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Github, Linkedin, Twitter, Mail, Heart } from "lucide-react";
+import { Github, Linkedin, Twitter, Mail, ArrowUp } from "lucide-react";
+
+const FOOTER_LINKS = [
+  {
+    title: "Navigation",
+    links: [
+      { label: "Home",       href: "#home"       },
+      { label: "About",      href: "#about"      },
+      { label: "Projects",   href: "#projects"   },
+      { label: "Experience", href: "#experience" },
+      { label: "Contact",    href: "#contact"    }
+    ]
+  },
+  {
+    title: "Resources",
+    links: [
+      { label: "GitHub",   href: "https://github.com/Davidruph"                        },
+      { label: "LinkedIn", href: "https://www.linkedin.com/in/david-agbugba-119b2b120" }
+    ]
+  }
+];
+
+const SOCIALS = [
+  { Icon: Github,   href: "https://github.com/Davidruph",                            label: "GitHub"   },
+  { Icon: Linkedin, href: "https://www.linkedin.com/in/david-agbugba-119b2b120",     label: "LinkedIn" },
+  { Icon: Twitter,  href: "https://x.com/Davidruph",                                 label: "Twitter"  },
+  { Icon: Mail,     href: "mailto:dagbugba@yahoo.com",                               label: "Email"    }
+];
 
 export default function Footer() {
-  const currentYear = new Date().getFullYear();
-
-  const footerLinks = [
-    {
-      title: "Navigation",
-      links: [
-        { label: "Home", href: "#" },
-        { label: "About", href: "#about" },
-        { label: "Projects", href: "#projects" },
-        { label: "Contact", href: "#contact" }
-      ]
-    },
-    {
-      title: "Resources",
-      links: [
-        { label: "GitHub", href: "https://github.com/Davidruph" },
-        {
-          label: "LinkedIn",
-          href: "https://www.linkedin.com/in/david-agbugba-119b2b120"
-        }
-        // { label: "Resume", href: "#" },
-        // { label: "Blog", href: "#" }
-      ]
-    }
-  ];
-
-  const socialLinks = [
-    { icon: Github, href: "https://github.com/Davidruph", label: "GitHub" },
-    {
-      icon: Linkedin,
-      href: "https://www.linkedin.com/in/david-agbugba-119b2b120",
-      label: "LinkedIn"
-    },
-    { icon: Twitter, href: "https://x.com/Davidruph", label: "Twitter" },
-    { icon: Mail, href: "mailto:dagbugba@yahoo.com", label: "Email" }
-  ];
+  const year = new Date().getFullYear();
 
   return (
-    <footer className="relative bg-gradient-to-t from-slate-950 to-slate-900 border-t border-purple-500/20 py-16 px-4">
-      {/* Animated background */}
+    <footer className="relative bg-warm-950 border-t border-warm-700/60 py-16 px-4">
+      {/* Subtle amber glow */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         <motion.div
-          animate={{ opacity: [0.05, 0.15, 0.05] }}
-          transition={{ duration: 8, repeat: Infinity }}
-          className="absolute -bottom-40 -left-40 w-96 h-96 bg-purple-500 rounded-full mix-blend-multiply filter blur-3xl"
+          animate={{ opacity: [0.04, 0.1, 0.04] }}
+          transition={{ duration: 9, repeat: Infinity }}
+          className="absolute -bottom-32 -left-32 w-80 h-80 bg-amber-600 rounded-full blur-[100px]"
         />
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto">
-        {/* Main content */}
-        <div className="grid md:grid-cols-4 gap-12 mb-12">
+        <div className="grid md:grid-cols-4 gap-10 mb-12">
           {/* Brand */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="col-span-md:col-span-2 lg:col-span-1"
           >
-            <motion.div
-              whileHover={{ scale: 1.1 }}
-              className="flex items-center gap-2 mb-4"
-            >
-              <div className="w-8 h-8 bg-gradient-to-br from-purple-500 to-pink-600 rounded-lg" />
-              <span className="text-xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
-                David
+            <div className="flex items-center gap-2 mb-4">
+              <div className="w-8 h-8 rounded-lg bg-amber-500 flex items-center justify-center">
+                <span className="text-warm-950 font-bold text-sm">DA</span>
+              </div>
+              <span className="text-warm-100 font-bold text-lg">
+                David<span className="text-amber-400">.</span>
               </span>
-            </motion.div>
-            <p className="text-gray-400 text-sm mb-4">
-              Crafting beautiful, fast, and intuitive digital experiences.
+            </div>
+            <p className="text-warm-500 text-sm leading-relaxed mb-3">
+              Crafting fast, beautiful, and intuitive digital experiences.
             </p>
-            <p className="text-gray-500 text-xs">
-              © {currentYear} David Agbugba. All rights reserved.
-            </p>
+            <p className="text-warm-600 text-xs">© {year} David Agbugba.</p>
           </motion.div>
 
-          {/* Links sections */}
-          {footerLinks.map((section, idx) => (
+          {/* Link sections */}
+          {FOOTER_LINKS.map((section, i) => (
             <motion.div
               key={section.title}
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: idx * 0.1 }}
+              transition={{ delay: i * 0.08 }}
               viewport={{ once: true }}
             >
-              <h4 className="text-white font-semibold mb-4">{section.title}</h4>
-              <ul className="space-y-2">
+              <h4 className="text-warm-200 font-semibold text-sm mb-4 uppercase tracking-wider">{section.title}</h4>
+              <ul className="space-y-2.5">
                 {section.links.map((link) => (
-                  <motion.li key={link.label} whileHover={{ x: 5 }}>
+                  <motion.li key={link.label} whileHover={{ x: 4 }}>
                     <a
                       href={link.href}
-                      className="text-gray-400 hover:text-purple-400 transition-colors text-sm"
+                      className="text-warm-500 hover:text-amber-400 transition-colors text-sm"
                     >
                       {link.label}
                     </a>
@@ -104,29 +91,24 @@ export default function Footer() {
             </motion.div>
           ))}
 
-          {/* Newsletter or CTA */}
+          {/* CTA */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
+            transition={{ delay: 0.18 }}
             viewport={{ once: true }}
           >
-            <h4 className="text-white font-semibold mb-4">Get in touch</h4>
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="w-full px-4 py-2 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-lg font-semibold text-sm hover:shadow-lg transition-all mb-4"
+            <h4 className="text-warm-200 font-semibold text-sm mb-4 uppercase tracking-wider">Get in Touch</h4>
+            <motion.a
+              href="mailto:dagbugba@yahoo.com"
+              whileHover={{ scale: 1.04 }}
+              whileTap={{ scale: 0.96 }}
+              className="block w-full px-4 py-2.5 bg-amber-500 hover:bg-amber-400 text-warm-950 rounded-lg font-bold text-sm text-center transition-colors mb-3"
             >
-              <a
-                href="mailto:dagbugba@yahoo.com"
-                className="w-full flex items-center justify-center"
-              >
-                Contact Me
-              </a>
-            </motion.button>
-            <p className="text-gray-400 text-xs">
-              Have a project? Let&apos;s collaborate and create something
-              amazing.
+              Contact Me
+            </motion.a>
+            <p className="text-warm-600 text-xs leading-relaxed">
+              Have a project? Let&apos;s create something exceptional together.
             </p>
           </motion.div>
         </div>
@@ -137,58 +119,34 @@ export default function Footer() {
           whileInView={{ scaleX: 1 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="h-px bg-gradient-to-r from-transparent via-purple-500/50 to-transparent mb-8"
+          className="h-px bg-gradient-to-r from-transparent via-amber-500/30 to-transparent mb-8"
         />
 
-        {/* Bottom section */}
-        <div className="flex flex-col md:flex-row items-center justify-between gap-8">
-          {/* Left text */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            className="flex items-center gap-2 text-gray-400 text-sm"
-          >
-            <span>Made with</span>
-            <motion.span
-              animate={{ scale: [1, 1.2, 1] }}
-              transition={{ duration: 1, repeat: Infinity }}
-            >
-              <Heart className="w-4 h-4 text-pink-500 fill-pink-500" />
-            </motion.span>
-            <span>and Next.js</span>
-          </motion.div>
+        {/* Bottom */}
+        <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+          <p className="text-warm-600 text-sm">Built with Next.js &amp; Framer Motion</p>
 
-          {/* Social links */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            className="flex items-center gap-4"
-          >
-            {socialLinks.map((social) => (
+          <div className="flex items-center gap-2.5">
+            {SOCIALS.map(({ Icon, href, label }) => (
               <motion.a
-                key={social.label}
-                href={social.href}
-                title={social.label}
-                whileHover={{ scale: 1.2, y: -3 }}
+                key={label}
+                href={href}
+                title={label}
+                whileHover={{ scale: 1.15, y: -2 }}
                 whileTap={{ scale: 0.9 }}
-                className="w-10 h-10 rounded-full bg-gradient-to-br from-purple-500/20 to-pink-500/20 border border-purple-400/30 flex items-center justify-center text-purple-300 hover:text-white hover:border-purple-400/60 transition-colors"
+                className="w-9 h-9 rounded-lg bg-warm-800 border border-warm-700 hover:border-amber-500/60 flex items-center justify-center text-warm-500 hover:text-amber-400 transition-all"
               >
-                <social.icon className="w-5 h-5" />
+                <Icon className="w-4 h-4" />
               </motion.a>
             ))}
-          </motion.div>
+          </div>
 
-          {/* Right text */}
           <motion.a
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            href="#"
-            className="text-gray-400 hover:text-purple-400 transition-colors text-sm"
+            href="#home"
+            whileHover={{ y: -2 }}
+            className="flex items-center gap-1.5 text-warm-500 hover:text-amber-400 transition-colors text-sm"
           >
-            Scroll to top ↑
+            Back to top <ArrowUp className="w-3.5 h-3.5" />
           </motion.a>
         </div>
       </div>

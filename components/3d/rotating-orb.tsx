@@ -6,43 +6,44 @@ export function RotatingOrb() {
   return (
     <div className="w-full h-96 flex items-center justify-center">
       <div className="relative w-64 h-64 flex items-center justify-center">
-        {/* Outer rotating ring */}
+        {/* Outer ring */}
         <motion.div
           animate={{ rotate: 360 }}
-          transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-          className="absolute w-64 h-64 border-2 border-purple-500/50 rounded-full"
+          transition={{ duration: 22, repeat: Infinity, ease: "linear" }}
+          className="absolute w-64 h-64 border border-amber-500/30 rounded-full"
+          style={{ borderStyle: "dashed" }}
         />
 
-        {/* Middle rotating ring */}
+        {/* Middle ring */}
         <motion.div
           animate={{ rotate: -360 }}
           transition={{ duration: 16, repeat: Infinity, ease: "linear" }}
-          className="absolute w-48 h-48 border-2 border-pink-500/50 rounded-full"
+          className="absolute w-48 h-48 border border-amber-400/40 rounded-full"
         />
 
-        {/* Inner rotating ring */}
+        {/* Inner ring */}
         <motion.div
           animate={{ rotate: 360 }}
-          transition={{ duration: 12, repeat: Infinity, ease: "linear" }}
-          className="absolute w-32 h-32 border-2 border-blue-500/50 rounded-full"
+          transition={{ duration: 11, repeat: Infinity, ease: "linear" }}
+          className="absolute w-32 h-32 border border-orange-500/50 rounded-full"
         />
 
-        {/* Central glowing orb */}
+        {/* Central orb */}
         <motion.div
           animate={{
             scale: [1, 1.1, 1],
             boxShadow: [
-              "0 0 20px rgba(168, 85, 247, 0.5)",
-              "0 0 40px rgba(168, 85, 247, 0.8)",
-              "0 0 20px rgba(168, 85, 247, 0.5)"
+              "0 0 24px rgba(245,158,11,0.4)",
+              "0 0 50px rgba(245,158,11,0.7)",
+              "0 0 24px rgba(245,158,11,0.4)"
             ]
           }}
           transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-          className="w-16 h-16 rounded-full bg-gradient-to-br from-purple-500 to-pink-500"
+          className="w-16 h-16 rounded-full bg-gradient-to-br from-amber-400 to-orange-600"
         />
       </div>
 
-      {/* Floating stars/particles */}
+      {/* Orbiting particles */}
       {[...Array(12)].map((_, i) => (
         <motion.div
           key={i}
@@ -52,13 +53,8 @@ export function RotatingOrb() {
             rotate: 360
           }}
           transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-          className="absolute w-1 h-1 bg-purple-400 rounded-full"
-          style={{
-            left: "50%",
-            top: "50%",
-            marginLeft: "-2px",
-            marginTop: "-2px"
-          }}
+          className="absolute w-1.5 h-1.5 bg-amber-400/60 rounded-full"
+          style={{ left: "50%", top: "50%", marginLeft: "-3px", marginTop: "-3px" }}
         />
       ))}
     </div>
