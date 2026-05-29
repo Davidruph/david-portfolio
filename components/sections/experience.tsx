@@ -6,31 +6,46 @@ import { Calendar, MapPin, ChevronDown } from "lucide-react";
 
 const EXPERIENCES = [
   {
-    title:    "Software Architect & Team Lead",
-    company:  "Techvibes International Limited",
+    title: "Software Architect & Team Lead",
+    company: "Techvibes International Limited",
     location: "FCT Abuja, Nigeria",
     duration: "Dec 2022 – Present",
     description:
       "Led product updates, supervised interns, and delivered performant user interfaces. Built scalable applications including a school management system and subscription platform. Collaborated on API integrations, performed code reviews, and implemented optimised SQL queries and unit tests.",
-    highlights: ["Product Engineering", "Team Leadership", "Data Architecture", "Subscription Systems"]
+    highlights: [
+      "Product Engineering",
+      "Team Leadership",
+      "Data Architecture",
+      "Subscription Systems"
+    ]
   },
   {
-    title:    "Frontend Developer",
-    company:  "Oaks Intelligence Limited",
-    location: "Lagos, Nigeria",
+    title: "Frontend Developer",
+    company: "Oaks Intelligence Limited",
+    location: "Remote",
     duration: "Sep 2023 – Aug 2024",
     description:
       "Implemented pixel-perfect UI components and collaborated on large-scale design projects. Built real-time validation algorithms, optimised reusable React modules, and developed React-based tools including an asset risk assessment system and a social platform with AI integration.",
-    highlights: ["UI Engineering", "React & Next.js", "MERN Stack", "AI Integration"]
+    highlights: [
+      "UI Engineering",
+      "React & Next.js",
+      "MERN Stack",
+      "AI Integration"
+    ]
   },
   {
-    title:    "Full Stack Developer",
-    company:  "Fiverr (Freelance)",
+    title: "Full Stack Developer",
+    company: "Fiverr (Freelance)",
     location: "Remote",
     duration: "May 2020 – Nov 2022",
     description:
       "Built full-stack applications for global clients, delivering intuitive UIs and reliable backend systems. Collaborated closely with clients, executed QA testing, and completed projects using Laravel, MERN Stack, and multiple database systems.",
-    highlights: ["Full-Stack Development", "Client Collaboration", "QA & Testing", "Database Design"]
+    highlights: [
+      "Full-Stack Development",
+      "Client Collaboration",
+      "QA & Testing",
+      "Database Design"
+    ]
   }
 ];
 
@@ -88,7 +103,9 @@ export default function Experience() {
                 animate={{ scale: open === i ? 1.3 : 1 }}
                 className="absolute left-0 top-5 w-8 h-8 rounded-full bg-warm-800 border-2 border-amber-500/60 flex items-center justify-center"
               >
-                <div className={`w-2 h-2 rounded-full transition-colors ${open === i ? "bg-amber-400" : "bg-warm-500"}`} />
+                <div
+                  className={`w-2 h-2 rounded-full transition-colors ${open === i ? "bg-amber-400" : "bg-warm-500"}`}
+                />
               </motion.div>
 
               {/* Card */}
@@ -103,10 +120,14 @@ export default function Experience() {
                 {/* Always-visible summary */}
                 <div className="p-6 flex items-start justify-between gap-4">
                   <div>
-                    <h3 className={`text-xl font-bold transition-colors ${open === i ? "text-amber-400" : "text-warm-100"}`}>
+                    <h3
+                      className={`text-xl font-bold transition-colors ${open === i ? "text-amber-400" : "text-warm-100"}`}
+                    >
                       {exp.title}
                     </h3>
-                    <p className="text-amber-500/80 font-medium mt-0.5 text-sm">{exp.company}</p>
+                    <p className="text-amber-500/80 font-medium mt-0.5 text-sm">
+                      {exp.company}
+                    </p>
 
                     <div className="flex flex-wrap gap-4 mt-3 text-xs text-warm-500">
                       <span className="flex items-center gap-1.5">
@@ -120,7 +141,10 @@ export default function Experience() {
                     </div>
                   </div>
 
-                  <motion.div animate={{ rotate: open === i ? 180 : 0 }} transition={{ duration: 0.25 }}>
+                  <motion.div
+                    animate={{ rotate: open === i ? 180 : 0 }}
+                    transition={{ duration: 0.25 }}
+                  >
                     <ChevronDown className="w-5 h-5 text-warm-500 mt-1 flex-shrink-0" />
                   </motion.div>
                 </div>
@@ -136,7 +160,9 @@ export default function Experience() {
                       className="overflow-hidden"
                     >
                       <div className="px-6 pb-6 border-t border-warm-600/60 pt-4 space-y-4">
-                        <p className="text-warm-300 text-sm leading-relaxed">{exp.description}</p>
+                        <p className="text-warm-300 text-sm leading-relaxed">
+                          {exp.description}
+                        </p>
                         <div className="flex flex-wrap gap-2">
                           {exp.highlights.map((h) => (
                             <span
