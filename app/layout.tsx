@@ -11,7 +11,10 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "David Agbugba | Full Stack Developer",
   description:
-    "Interactive portfolio showcasing projects, skills, and experience"
+    "Interactive portfolio showcasing projects, skills, and experience",
+  icons: {
+    icon: "/favicon.svg"
+  }
 };
 
 export default function RootLayout({
