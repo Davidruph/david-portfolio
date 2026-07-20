@@ -5,87 +5,118 @@ import { ExternalLink, Github } from "lucide-react";
 
 const PROJECTS = [
   {
-    title:   "Radiant Hyve",
+    title: "Radiant Hyve",
     tagline: "The operating system for modern childcare centres",
     description:
       "Automate admin, simplify parent communication, manage billing, and scale your childcare centre — all in one powerful platform.",
-    metrics:  ["Multi-tenant architecture", "Real-time messaging", "Billing automation"],
-    tags:     ["Node.js", "Flutter", "React", "React Query", "MySQL", "Tailwind", "WebSockets"],
-    link:     "https://radianthyve.com/",
-    github:   "https://github.com/Davidruph/Radiant-Hyve-Backend",
-    image:    "/radiant-hyve.png",
+    metrics: [
+      "Multi-tenant architecture",
+      "Real-time messaging",
+      "Billing automation"
+    ],
+    tags: [
+      "Node.js",
+      "Flutter",
+      "React",
+      "React Query",
+      "MySQL",
+      "Tailwind",
+      "WebSockets"
+    ],
+    link: "https://radianthyve.com/",
+    github: "https://github.com/Davidruph/Radiant-Hyve-Backend",
+    image: "/radiant-hyve.png",
     featured: true
   },
   {
-    title:   "MailCheetah AI",
+    title: "MailCheetah AI",
     tagline: "SaaS email campaign platform",
     description:
       "Manages campaigns, subscribers, and newsletters with AI-powered copy. Reduced newsletter design time by 50% for 1,000+ subscribers.",
-    metrics:  ["1,000+ subscribers", "50% faster design", "AI copy generation"],
-    tags:     ["CodeIgniter 4", "Grape.js", "OpenAI", "MySQL", "Bootstrap"],
-    link:     "https://mailcheetah.ai/",
-    github:   null,
-    image:    "/mailcheetah.png"
+    metrics: ["1,000+ subscribers", "50% faster design", "AI copy generation"],
+    tags: ["CodeIgniter 4", "Grape.js", "OpenAI", "MySQL", "Bootstrap"],
+    link: "https://mailcheetah.ai/",
+    github: null,
+    image: "/mailcheetah.png"
   },
   {
-    title:   "Vorkio",
+    title: "Vorkio",
     tagline: "AI-powered crypto analytics platform",
     description:
       "Real-time token insights, risk scoring, on-chain data analysis, and portfolio optimisation for data-driven investors.",
-    metrics:  ["On-chain analytics", "Risk scoring engine", "Multi-tenant SaaS"],
-    tags:     ["Next.js", "Supabase", "Moralis", "React Query", "Shadcn UI"],
-    link:     "https://vorkio.vercel.app/",
-    github:   null,
-    image:    "/vorkio.png"
+    metrics: ["On-chain analytics", "Risk scoring engine", "Multi-tenant SaaS"],
+    tags: ["Next.js", "Supabase", "Moralis", "React Query", "Shadcn UI"],
+    link: "https://vorkio.vercel.app/",
+    github: null,
+    image: "/vorkio.png"
   },
   {
-    title:   "QampusPlus — New",
+    title: "QampusPlus — New",
     tagline: "Modern school management app",
     description:
       "CBT exams, result generation, assignment tracking, and billing management for students, staff, parents, and super admins.",
-    metrics:  ["CBT exam engine", "Role-based dashboards", "Billing system"],
-    tags:     ["React", "Redux", "RTK Query", "Tailwind", "Node.js", "Prisma"],
-    link:     "https://qampusplusapp.com/",
-    github:   null,
-    image:    "/newqplus.png"
+    metrics: ["CBT exam engine", "Role-based dashboards", "Billing system"],
+    tags: ["React", "Redux", "RTK Query", "Tailwind", "Node.js", "Prisma"],
+    link: "https://qampusplusapp.com/",
+    github: null,
+    image: "/newqplus.png"
   },
   {
-    title:   "QampusPlus — Legacy",
+    title: "QampusPlus — Legacy",
     tagline: "School management system (Laravel)",
     description:
       "Earlier version built with Laravel. Features student result generation, assessments, role-based dashboards, and billing.",
-    metrics:  ["Laravel + Blade", "Real-time via WebSockets", "Multi-role system"],
-    tags:     ["Laravel", "Blade", "MySQL", "jQuery", "Bootstrap"],
-    link:     "https://school.qampusplus.com/",
-    github:   null,
-    image:    "/oldqplus.png"
+    metrics: [
+      "Laravel + Blade",
+      "Real-time via WebSockets",
+      "Multi-role system"
+    ],
+    tags: ["Laravel", "Blade", "MySQL", "jQuery", "Bootstrap"],
+    link: "https://school.qampusplus.com/",
+    github: null,
+    image: "/oldqplus.png"
   },
   {
-    title:   "Kommunita",
+    title: "Kommunita",
     tagline: "Cross-platform community platform",
     description:
       "Connects businesses with users sharing similar interests. Improved user retention by 20% through enhanced UX and AI-driven recommendations.",
-    metrics:  ["20% retention lift", "AI-driven feeds", "Real-time chat"],
-    tags:     ["React", "Redux", "Tailwind", "RTK Query", "WebSockets"],
-    link:     "https://kommunita.com/",
-    github:   null,
-    image:    "/kommunita.png"
+    metrics: ["20% retention lift", "AI-driven feeds", "Real-time chat"],
+    tags: ["React", "Redux", "Tailwind", "RTK Query", "WebSockets"],
+    link: "https://kommunita.com/",
+    github: null,
+    image: "/kommunita.png"
+  },
+  {
+    title: "Ontology of Value",
+    tagline: "Career coaching & talent consultancy platform",
+    description:
+      "Built a WordPress platform for a career coaching and talent consultancy business, replacing a static brochure site with one that runs client operations end to end. Added custom booking for coaching sessions, integrated billing for program payments, and built interactive charts to visualize assessment results and career progress.",
+    metrics: [
+      "Custom booking flow",
+      "Integrated billing",
+      "Interactive analytics charts"
+    ],
+    tags: ["WordPress", "PHP", "Chart.js", "Stripe", "Elementor"],
+    link: "https://ontologyofvalue.com/",
+    github: null,
+    image: "/ontologyofvalue.png"
   }
 ];
 
 const container = {
-  hidden:  {},
+  hidden: {},
   visible: { transition: { staggerChildren: 0.1 } }
 };
 
 const item = {
-  hidden:  { opacity: 0, y: 24 },
+  hidden: { opacity: 0, y: 24 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.55 } }
 };
 
 export default function Projects() {
   const featured = PROJECTS[0];
-  const rest     = PROJECTS.slice(1);
+  const rest = PROJECTS.slice(1);
 
   return (
     <section
@@ -118,7 +149,8 @@ export default function Projects() {
             <span className="block text-amber-400">Projects</span>
           </h2>
           <p className="text-warm-400 mt-4 max-w-xl mx-auto text-sm">
-            Real products built for real businesses — from concept to production.
+            Real products built for real businesses — from concept to
+            production.
           </p>
         </motion.div>
 
