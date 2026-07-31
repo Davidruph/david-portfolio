@@ -32,9 +32,13 @@ const PROJECTS = [
     title: "Ponlecanas",
     tagline: "Intergenerational connection platform",
     description:
-      "A full-stack platform connecting seniors with local volunteers for everyday help — errands, companionship, digital assistance, and home tasks — built to foster intergenerational community connection.",
+      "Connects seniors with local volunteers for everyday help — errands, companionship, digital assistance, and home tasks.",
     metrics: [
-      "A 35+ page platform connecting a 55+ skill-sharing community with 18+ learners through end-to-end booking, wallet payments, and a rewards/ranking system."
+      "35+ pages",
+      "55+ skill-sharing community",
+      "18+ learner base",
+      "End-to-end booking & wallet payments",
+      "Rewards & ranking system"
     ],
     tags: [
       "PHP",
@@ -52,9 +56,12 @@ const PROJECTS = [
     title: "GoKollect",
     tagline: "Government revenue collection platform",
     description:
-      "A partner-facing revenue collection and invoice checkout platform built for a state government revenue authority, enabling digital payment collection through an integrated payment gateway.",
+      "Partner-facing revenue collection and invoice checkout platform for a state government revenue authority.",
     metrics: [
-      "Powers revenue collection across 100+ government institutions in Benue State, processing tens of thousands of invoices with a ~75% payment completion rate tracked in real time."
+      "100+ government institutions",
+      "Tens of thousands of invoices processed",
+      "~75% payment completion rate",
+      "Real-time collection dashboard"
     ],
     tags: [
       "React JS",
