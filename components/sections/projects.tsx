@@ -29,6 +29,48 @@ const PROJECTS = [
     featured: true
   },
   {
+    title: "Ponlecanas",
+    tagline: "Intergenerational connection platform",
+    description:
+      "A full-stack platform connecting seniors with local volunteers for everyday help — errands, companionship, digital assistance, and home tasks — built to foster intergenerational community connection.",
+    metrics: [
+      "A 35+ page platform connecting a 55+ skill-sharing community with 18+ learners through end-to-end booking, wallet payments, and a rewards/ranking system."
+    ],
+    tags: [
+      "PHP",
+      "MySQL",
+      "Bootstrap",
+      "MVC Architecture",
+      "Google Maps API",
+      "Geolocation Services"
+    ],
+    link: "https://ponlecanas.com/",
+    github: null,
+    image: "/ponlecanas.png"
+  },
+  {
+    title: "GoKollect",
+    tagline: "Government revenue collection platform",
+    description:
+      "A partner-facing revenue collection and invoice checkout platform built for a state government revenue authority, enabling digital payment collection through an integrated payment gateway.",
+    metrics: [
+      "Powers revenue collection across 100+ government institutions in Benue State, processing tens of thousands of invoices with a ~75% payment completion rate tracked in real time."
+    ],
+    tags: [
+      "React JS",
+      "MySQL",
+      "tailwind CSS",
+      "Node.js",
+      "Rest API",
+      "JWT Authentication",
+      "Express.js",
+      "Payment Gateway Integration"
+    ],
+    link: "https://gokollect.bnsg.org.ng/",
+    github: null,
+    image: "/gokollect.png"
+  },
+  {
     title: "MailCheetah AI",
     tagline: "SaaS email campaign platform",
     description:
