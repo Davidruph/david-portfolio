@@ -6,7 +6,7 @@ import { Calendar, MapPin, ChevronDown } from "lucide-react";
 
 const EXPERIENCES = [
   {
-    title: "Software Architect & Team Lead",
+    title: "Software Architect/Developer",
     company: "Techvibes International Limited",
     location: "FCT Abuja, Nigeria",
     duration: "Dec 2022 – Present",
