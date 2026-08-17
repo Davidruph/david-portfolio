@@ -20,7 +20,7 @@ const EXPERIENCES = [
     ]
   },
   {
-    title: "Frontend Developer",
+    title: "Frontend Developer - Contract",
     company: "Oaks Intelligence Limited",
     location: "Remote",
     duration: "Sep 2023 – Aug 2024",

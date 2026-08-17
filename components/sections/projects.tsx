@@ -77,17 +77,17 @@ const PROJECTS = [
     github: null,
     image: "/gokollect.png"
   },
-  {
-    title: "MailCheetah AI",
-    tagline: "SaaS email campaign platform",
-    description:
-      "Manages campaigns, subscribers, and newsletters with AI-powered copy. Reduced newsletter design time by 50% for 1,000+ subscribers.",
-    metrics: ["1,000+ subscribers", "50% faster design", "AI copy generation"],
-    tags: ["CodeIgniter 4", "Grape.js", "OpenAI", "MySQL", "Bootstrap"],
-    link: "https://mailcheetah.ai/",
-    github: null,
-    image: "/mailcheetah.png"
-  },
+  // {
+  //   title: "MailCheetah AI",
+  //   tagline: "SaaS email campaign platform",
+  //   description:
+  //     "Manages campaigns, subscribers, and newsletters with AI-powered copy. Reduced newsletter design time by 50% for 1,000+ subscribers.",
+  //   metrics: ["1,000+ subscribers", "50% faster design", "AI copy generation"],
+  //   tags: ["CodeIgniter 4", "Grape.js", "OpenAI", "MySQL", "Bootstrap"],
+  //   link: "https://mailcheetah.ai/",
+  //   github: null,
+  //   image: "/mailcheetah.png"
+  // },
   {
     title: "Vorkio",
     tagline: "AI-powered crypto analytics platform",
