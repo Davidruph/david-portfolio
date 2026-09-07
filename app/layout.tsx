@@ -1,17 +1,14 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/providers/theme-provider";
 import Navbar from "@/components/layout/navbar";
 import Footer from "@/components/layout/footer";
 import Script from "next/script";
 
-const inter = Inter({ subsets: ["latin"] });
-
 export const metadata: Metadata = {
-  title: "David Agbugba | Full Stack Developer",
+  title: "David Agbugba | Software Architect & Team Lead",
   description:
-    "Interactive portfolio showcasing projects, skills, and experience",
+    "David Agbugba builds and leads the engineering behind ambitious digital products.",
   icons: {
     icon: "/favicon.svg"
   }
@@ -24,7 +21,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={inter.className}>
+      <body>
         {/* Google Tag (gtag.js) */}
         <Script
           async

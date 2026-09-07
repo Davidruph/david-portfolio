@@ -1,76 +1,43 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
-import { motion, AnimatePresence, useMotionValue, useSpring } from "framer-motion";
-import Hero       from "@/components/sections/hero";
-import About      from "@/components/sections/about";
-import Skills     from "@/components/sections/skills";
-import Projects   from "@/components/sections/projects";
-import Experience from "@/components/sections/experience";
-import Contact    from "@/components/sections/contact";
-import ScrollIndicator from "@/components/ui/scroll-indicator";
+import Image from "next/image";
+import { motion } from "framer-motion";
+import { ArrowDownRight, ArrowUpRight, Github, Linkedin } from "lucide-react";
 
-function CursorFollower() {
-  const mx = useMotionValue(-100);
-  const my = useMotionValue(-100);
-  const sx = useSpring(mx, { stiffness: 80, damping: 22 });
-  const sy = useSpring(my, { stiffness: 80, damping: 22 });
+const projects = [
+  { number: "01", title: "GoKollect", type: "Public revenue infrastructure", image: "/gokollect.png", href: "https://gokollect.bnsg.org.ng/", problem: "Payment collection needs trust at every handoff, from partner invoice to government reporting.", contribution: "Built the partner-facing collection and checkout experience, with secure API flows and live operational visibility.", stack: "React · Node.js · MySQL · Payment APIs", className: "" },
+  { number: "02", title: "QampusPlus", type: "Education management, rethought", image: "/newqplus.png", href: "https://qampusplusapp.com/", problem: "Schools need one dependable system for learning, records and the operations around both.", contribution: "Led full-stack engineering across CBT exams, role-specific workflows, results and billing systems.", stack: "React · Node.js · Prisma · RTK Query", className: "" },
+  { number: "03", title: "QampusPlus Legacy", type: "The Laravel foundation", image: "/oldqplus.png", href: "https://school.qampusplus.com/", problem: "The first generation of the platform needed to bring school administration, assessment and billing into one dependable system.", contribution: "Built the Laravel application foundation with role-specific dashboards, results, assessment flows and real-time features.", stack: "Laravel · Blade · MySQL · WebSockets", className: "" },
+  { number: "04", title: "Ontology of Value", type: "A service business in motion", image: "/ontologyofvalue.png", href: "https://ontologyofvalue.com/", problem: "A consultancy needed more than a brochure site: it needed a client operating layer.", contribution: "Created custom booking, payments and visual assessment reporting that connected the business experience end to end.", stack: "WordPress · PHP · Stripe · Chart.js", className: "" },
+];
+const capabilities = [["01", "Product", "Turning complex ideas into products people can use, understand and come back to.", "Discovery · UX systems · SaaS"], ["02", "Architecture", "Choosing the boundaries, data models and foundations that let a product grow without drama.", "APIs · Multi-tenancy · Data design"], ["03", "Engineering", "Building interfaces and backend systems with the same attention to reliability and detail.", "React · Next.js · Laravel · Node.js"], ["04", "Applied AI", "Putting AI where it makes a workflow meaningfully faster, clearer or more capable.", "Integrations · Automations · Intelligence"], ["05", "Leadership", "Giving teams the structure, technical context and momentum to ship thoughtful work.", "Code review · Mentoring · Delivery"]];
+const reveal = { initial: { opacity: 0, y: 28 }, whileInView: { opacity: 1, y: 0 }, viewport: { once: true, margin: "-12%" }, transition: { duration: .65, ease: [0.22, 1, .36, 1] as const } };
 
-  useEffect(() => {
-    const move = (e: MouseEvent) => { mx.set(e.clientX - 16); my.set(e.clientY - 16); };
-    window.addEventListener("mousemove", move);
-    return () => window.removeEventListener("mousemove", move);
-  }, [mx, my]);
+type Project = (typeof projects)[number];
 
-  return (
-    <motion.div
-      style={{ x: sx, y: sy }}
-      className="fixed top-0 left-0 w-8 h-8 rounded-full border border-amber-400/35 pointer-events-none z-[9999] hidden lg:block"
-    />
-  );
+function ProjectCard({ project, index }: { project: Project; index: number }) {
+  return <motion.article {...reveal} transition={{ ...reveal.transition, delay: index % 2 * .08 }} className={`project ${project.className}`}>
+    <a href={project.href} target="_blank" rel="noreferrer" className="project-image"><Image src={project.image} alt={`${project.title} product interface`} fill sizes="(max-width: 768px) 100vw, 66vw" /><span className="project-open"><ArrowUpRight /></span></a>
+    <div className="project-meta"><span>{project.number}</span><span>{project.type}</span></div>
+    <h3>{project.title}</h3><p className="project-problem">{project.problem}</p>
+    <p className="project-contribution"><b>My contribution: </b>{project.contribution}</p><p className="project-stack">{project.stack}</p>
+  </motion.article>;
 }
 
-export default function Home() {
-  const [isLoading, setIsLoading] = useState(true);
+type Capability = (typeof capabilities)[number];
 
-  useEffect(() => {
-    const id = setTimeout(() => setIsLoading(false), 600);
-    return () => clearTimeout(id);
-  }, []);
-
-  return (
-    <AnimatePresence>
-      <div className="relative overflow-hidden">
-        <CursorFollower />
-        <ScrollIndicator />
-        {isLoading && <LoadingScreen />}
-        <Hero />
-        <About />
-        <Skills />
-        <Projects />
-        <Experience />
-        <Contact />
-      </div>
-    </AnimatePresence>
-  );
+function CapabilityRow({ capability }: { capability: Capability }) {
+  const [number, title, body, technology] = capability;
+  return <motion.div {...reveal} className="capability">
+    <span>{number}</span><h3>{title}</h3><p>{body}</p><small>{technology}</small>
+  </motion.div>;
 }
 
-function LoadingScreen() {
-  return (
-    <motion.div
-      initial={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      transition={{ duration: 0.4 }}
-      className="fixed inset-0 bg-warm-950 z-[9998] flex items-center justify-center"
-    >
-      <div className="flex flex-col items-center gap-4">
-        <motion.div
-          animate={{ rotate: 360 }}
-          transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
-          className="w-10 h-10 rounded-full border-2 border-amber-500 border-t-transparent"
-        />
-        <span className="text-amber-500 text-sm font-medium tracking-widest uppercase">Loading</span>
-      </div>
-    </motion.div>
-  );
-}
+export default function Home() { return <>
+  <section id="home" className="hero-shell"><div className="grain" /><div className="hero-orbit orbit-one" /><div className="hero-orbit orbit-two" /><div className="page-width hero-content"><motion.p {...reveal} className="eyebrow">David Agbugba <span>/</span> Software architect &amp; team lead</motion.p><motion.h1 initial={{ opacity: 0, y: 45 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: .9, delay: .08, ease: [0.22, 1, .36, 1] }}>I make ambitious<br /><em>products</em> possible.</motion.h1><motion.div {...reveal} transition={{ ...reveal.transition, delay: .18 }} className="hero-bottom"><p>I build the engineering systems behind digital products that need to work beautifully today, and hold their shape as they grow.</p><a href="#work" className="round-link" aria-label="Explore selected work"><ArrowDownRight /></a></motion.div></div><p className="hero-index">SELECTED WORK / 04</p></section>
+  <section id="story" className="story section page-width"><motion.p {...reveal} className="eyebrow">A product-minded engineer</motion.p><motion.div {...reveal} className="story-grid"><h2>Good software makes the complicated feel <em>inevitable.</em></h2><div><p>I work at the point where product ambition meets technical reality—shaping systems, guiding teams and carrying ideas from an early sketch to a dependable release.</p><p>My practice moves easily between interface detail and backend architecture: SaaS platforms, payment systems, APIs, real-time applications and useful AI integrations. The through-line is always the same: make the next right thing easier to build.</p><a className="text-link" href="/david-agbugba-cv.pdf" download>Read the full record <ArrowUpRight /></a></div></motion.div></section>
+  <section id="work" className="work section"><div className="page-width work-heading"><motion.p {...reveal} className="eyebrow">Selected work / 2020—now</motion.p><motion.h2 {...reveal}>Systems in the<br /><em>real world.</em></motion.h2></div><div className="page-width project-grid">{projects.map((project, index) => <ProjectCard key={`project-${project.number}`} project={project} index={index} />)}</div></section>
+  <section id="thinking" className="capabilities section page-width"><motion.div {...reveal} className="capability-intro"><p className="eyebrow">How I build</p><h2>More than a stack.<br />A way of <em>thinking.</em></h2></motion.div><div className="capability-list">{capabilities.map((capability) => <CapabilityRow key={`capability-${capability[0]}`} capability={capability} />)}</div></section>
+  <section id="experience" className="experience section"><div className="page-width"><motion.p {...reveal} className="eyebrow">Experience</motion.p><motion.div {...reveal} className="experience-title"><h2>Built with teams.<br /><em>Built to last.</em></h2><p>A concise record of roles where engineering judgment, product momentum and people all mattered.</p></motion.div><div className="experience-list"><div><span>2022 — Present</span><section><h3>Software Architect / Developer</h3><p>Techvibes International</p></section><b>Led product engineering, coached developers and delivered scalable education and subscription systems.</b></div><div><span>2023 — 2024</span><section><h3>Frontend Developer, Contract</h3><p>Oaks Intelligence</p></section><b>Built durable React systems and high-fidelity product interfaces across risk assessment and AI-enabled platforms.</b></div><div><span>2020 — 2022</span><section><h3>Full-stack Developer</h3><p>Independent / Fiverr</p></section><b>Partnered directly with global clients to ship reliable Laravel and JavaScript applications.</b></div></div></div></section>
+  <section id="contact" className="contact section"><div className="page-width"><motion.p {...reveal} className="eyebrow">Start a conversation</motion.p><motion.h2 {...reveal}>Have something<br />worth <em>building?</em></motion.h2><motion.div {...reveal} className="contact-row"><p>Whether it needs a stronger technical foundation, a product-minded engineering partner or a team to move with more clarity, I&apos;d like to hear about it.</p><a href="mailto:dagbugba@yahoo.com" className="contact-email">dagbugba<br />@yahoo.com <ArrowUpRight /></a></motion.div><div className="contact-foot"><a href="https://github.com/Davidruph" target="_blank" rel="noreferrer"><Github /> GitHub</a><a href="https://www.linkedin.com/in/david-agbugba-119b2b120" target="_blank" rel="noreferrer"><Linkedin /> LinkedIn</a><span>© {new Date().getFullYear()} David Agbugba</span></div></div></section>
+</>; }

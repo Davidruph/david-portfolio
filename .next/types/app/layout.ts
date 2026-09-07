@@ -1,4 +1,4 @@
-// File: /Users/user/Desktop/portfolio/david-portfolio/app/layout.tsx
+// File: /Users/user/Desktop/Desktop - David’s MacBook Pro - 2/portfolio/david-portfolio/app/layout.tsx
 import * as entry from '../../../app/layout.js'
 import type { ResolvingMetadata, ResolvingViewport } from 'next/dist/lib/metadata/types/metadata-interface.js'
 
