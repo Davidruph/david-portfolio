@@ -8,63 +8,64 @@ import {
   useScroll,
   useTransform
 } from "framer-motion";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ArrowDownRight, ArrowUpRight, Github, Linkedin } from "lucide-react";
+import { PROJECTS } from "@/data/projects";
 
-const projects = [
+const projectStories = [
   {
-    number: "01",
     title: "GoKollect",
     type: "Public revenue infrastructure",
-    image: "/gokollect.png",
     href: "https://gokollect.bnsg.org.ng/",
     problem:
       "Payment collection needs trust at every handoff, from partner invoice to government reporting.",
     contribution:
-      "Built the partner-facing collection and checkout experience, with secure API flows and live operational visibility.",
-    stack: "React · Node.js · MySQL · Payment APIs",
-    className: ""
+      "Built the partner-facing collection and checkout experience, with secure API flows and live operational visibility."
   },
   {
-    number: "02",
     title: "QampusPlus",
     type: "Education management, rethought",
-    image: "/newqplus.png",
     href: "https://qampusplusapp.com/",
     problem:
       "Schools need one dependable system for learning, records and the operations around both.",
     contribution:
-      "Led full-stack engineering across CBT exams, role-specific workflows, results and billing systems.",
-    stack: "React · Node.js · Prisma · RTK Query",
-    className: ""
+      "Led full-stack engineering across CBT exams, role-specific workflows, results and billing systems."
   },
   {
-    number: "03",
     title: "QampusPlus Legacy",
     type: "The Laravel foundation",
-    image: "/oldqplus.png",
     href: "https://school.qampusplus.com/",
     problem:
       "The first generation of the platform needed to bring school administration, assessment and billing into one dependable system.",
     contribution:
-      "Built the Laravel application foundation with role-specific dashboards, results, assessment flows and real-time features.",
-    stack: "Laravel · Blade · MySQL · WebSockets",
-    className: ""
+      "Built the Laravel application foundation with role-specific dashboards, results, assessment flows and real-time features."
   },
   {
-    number: "04",
     title: "Ontology of Value",
     type: "A service business in motion",
-    image: "/ontologyofvalue.png",
     href: "https://ontologyofvalue.com/",
     problem:
       "A consultancy needed more than a brochure site: it needed a client operating layer.",
     contribution:
-      "Created custom booking, payments and visual assessment reporting that connected the business experience end to end.",
-    stack: "WordPress · PHP · Stripe · Chart.js",
-    className: ""
+      "Created custom booking, payments and visual assessment reporting that connected the business experience end to end."
   }
 ];
+const projects = PROJECTS.map((project, index) => {
+  const story = projectStories.find((entry) => entry.href === project.link);
+  return {
+    number: String(index + 1).padStart(2, "0"),
+    title: story?.title ?? project.title,
+    type: story?.type ?? project.tagline,
+    image: project.image,
+    href: project.link,
+    github: project.github,
+    problem: story?.problem ?? project.description,
+    contribution: story?.contribution ?? project.metrics.join(" · "),
+    detailLabel: story ? "Behind the experience." : "Highlights.",
+    stack: project.tags.join(" · ")
+  };
+});
+
 const capabilities = [
   [
     "01",
@@ -151,7 +152,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
             src={project.image}
             alt={`${project.title} product interface`}
             fill
-            sizes="(max-width: 768px) 92vw, 1100px"
+            sizes="(max-width: 767px) calc(100vw - 82px), (max-width: 1184px) calc((100vw - 188px) / 2), 498px"
           />
         </div>
         <span className="project-open">
@@ -160,9 +161,19 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
       </motion.a>
       <motion.div {...reveal} className="project-details">
         <p className="project-contribution">
-          <b>Behind the experience.</b> {project.contribution}
+          <b>{project.detailLabel}</b> {project.contribution}
         </p>
         <p className="project-stack">{project.stack}</p>
+        {project.github && (
+          <a
+            href={project.github}
+            target="_blank"
+            rel="noreferrer"
+            className="text-link"
+          >
+            <Github size={15} /> View source <ArrowUpRight size={14} />
+          </a>
+        )}
       </motion.div>
     </article>
   );
@@ -178,6 +189,139 @@ function CapabilityRow({ capability }: { capability: Capability }) {
       <h3>{title}</h3>
       <p>{body}</p>
       <small>{technology}</small>
+    </motion.div>
+  );
+}
+
+function HeroProjectOrbit() {
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
+  const reducedMotion = useReducedMotion();
+
+  useEffect(() => {
+    if (isPaused || reducedMotion) return;
+
+    const interval = window.setInterval(() => {
+      setActiveIndex((current) => (current + 1) % projects.length);
+    }, 4000);
+
+    return () => window.clearInterval(interval);
+  }, [isPaused, reducedMotion]);
+
+  const getPosition = (index: number) => {
+    const total = projects.length;
+
+    let offset = (index - activeIndex + total) % total;
+
+    if (offset > total / 2) {
+      offset -= total;
+    }
+
+    return offset;
+  };
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 45 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 1.2, delay: 0.25 }}
+      className="hero-showcase hero-orbit"
+      onMouseEnter={() => setIsPaused(true)}
+      onMouseLeave={() => setIsPaused(false)}
+    >
+      {projects.map((project, index) => {
+        const position = getPosition(index);
+
+        const isActive = position === 0;
+        const isLeft = position === -1;
+        const isRight = position === 1;
+
+        const visible = isActive || isLeft || isRight;
+
+        let x = "0%";
+        let scale = 0.7;
+        let rotateY = 0;
+        let opacity = 0;
+        let zIndex = 0;
+        let y = 30;
+
+        if (isActive) {
+          x = "-50%";
+          scale = 1;
+          rotateY = 0;
+          opacity = 1;
+          zIndex = 3;
+          y = 0;
+        } else if (isLeft) {
+          x = "-122%";
+          scale = 0.76;
+          rotateY = 18;
+          opacity = 0.6;
+          zIndex = 2;
+          y = 25;
+        } else if (isRight) {
+          x = "22%";
+          scale = 0.76;
+          rotateY = -18;
+          opacity = 0.6;
+          zIndex = 2;
+          y = 25;
+        }
+
+        return (
+          <motion.a
+            key={project.number}
+            href={project.href}
+            target="_blank"
+            rel="noreferrer"
+            className="hero-orbit-card"
+            aria-label={`View ${project.title}`}
+            initial={false}
+            animate={{
+              x,
+              y,
+              scale,
+              rotateY,
+              opacity
+            }}
+            transition={{
+              duration: reducedMotion ? 0 : 0.9,
+              ease: [0.22, 1, 0.36, 1]
+            }}
+            style={{
+              zIndex,
+              pointerEvents: visible ? "auto" : "none"
+            }}
+          >
+            <div className="preview-label">
+              <span />
+              {project.title} / {project.type}
+            </div>
+
+            <div className="hero-orbit-image">
+              <Image
+                src={project.image}
+                alt={`${project.title} project`}
+                fill
+                priority={isActive}
+                sizes="(max-width: 767px) 86vw, 650px"
+              />
+            </div>
+          </motion.a>
+        );
+      })}
+
+      <div className="hero-orbit-indicators">
+        {projects.map((project, index) => (
+          <button
+            key={`orbit-dot-${project.number}`}
+            type="button"
+            className={index === activeIndex ? "active" : ""}
+            onClick={() => setActiveIndex(index)}
+            aria-label={`Show ${project.title}`}
+          />
+        ))}
+      </div>
     </motion.div>
   );
 }
@@ -221,32 +365,7 @@ function Hero() {
             A little about me <ArrowUpRight size={17} />
           </a>
         </motion.div>
-        <motion.div
-          initial={{ opacity: 0, y: 45 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1.2, delay: 0.25 }}
-          className="hero-showcase"
-          aria-hidden="true"
-        >
-          <div className="hero-preview preview-left">
-            <Image src="/newqplus.png" alt="" fill sizes="30vw" />
-          </div>
-          <div className="hero-preview preview-main">
-            <div className="preview-label">
-              <span /> GoKollect / Product engineering
-            </div>
-            <Image
-              src="/gokollect.png"
-              alt=""
-              fill
-              priority
-              sizes="(max-width: 767px) 80vw, 650px"
-            />
-          </div>
-          <div className="hero-preview preview-right">
-            <Image src="/odoramall.png" alt="" fill sizes="30vw" />
-          </div>
-        </motion.div>
+        <HeroProjectOrbit />
       </motion.div>
       <a href="#work" className="hero-index">
         SCROLL TO DISCOVER <ArrowDownRight size={14} />
@@ -288,7 +407,7 @@ export default function Home() {
       <section id="work" className="work section">
         <div className="page-width work-heading">
           <motion.p {...reveal} className="eyebrow">
-            Selected work / 2020—now
+            All projects / {projects.length} products
           </motion.p>
           <motion.h2 {...reveal}>
             Systems in the
