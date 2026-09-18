@@ -25,8 +25,7 @@ const PROJECTS = [
     ],
     link: "https://radianthyve.com/",
     github: "https://github.com/Davidruph/Radiant-Hyve-Backend",
-    image: "/radiant-hyve.png",
-    featured: true
+    image: "/radiant-hyve.png"
   },
   {
     title: "Ponlecanas",
@@ -51,6 +50,46 @@ const PROJECTS = [
     link: "https://ponlecanas.com/",
     github: null,
     image: "/ponlecanas.png"
+  },
+  {
+    title: "ODORAMALL",
+    tagline: "Multi-vendor marketplace for Nigerian businesses",
+    description:
+      "Connects Nigerian vendors and shoppers on one platform — verified storefronts, product/service listings, in-app messaging, and secure checkout.",
+    metrics: [
+      "Vendor storefronts & catalog management",
+      "Category-based discovery & search",
+      "In-app buyer-seller messaging",
+      "Secure checkout & order tracking",
+      "Reviews & ratings system"
+    ],
+    tags: ["Next.js", "TypeScript", "React", "Supabase", "PostgreSQL"],
+    link: "https://odoramall.ng/",
+    github: null,
+    image: "/odoramall.png"
+  },
+  {
+    title: "Merchant PWA",
+    tagline: "WhatsApp-first order & payments platform for small businesses",
+    description:
+      "Lets small businesses manage WhatsApp orders, payments, and fulfilment from one mobile dashboard — installable to the home screen, no app store required.",
+    metrics: [
+      "WhatsApp order management",
+      "Integrated invoicing & payments",
+      "Installable Progressive Web App",
+      "Pay-as-you-go pricing model"
+    ],
+    tags: [
+      "Next.js",
+      "TypeScript",
+      "Supabase",
+      "PostgreSQL",
+      "Progressive Web App"
+    ],
+    link: "https://merchant-plum.vercel.app/",
+    github: null,
+    image: "/merchant-pwa.png",
+    featured: true
   },
   {
     title: "GoKollect",
