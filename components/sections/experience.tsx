@@ -9,7 +9,7 @@ const EXPERIENCES = [
     title: "Software Architect/Developer",
     company: "Techvibes International Limited",
     location: "FCT Abuja, Nigeria",
-    duration: "Dec 2022 – Present",
+    duration: "Dec 2022 – Sep 2026",
     description:
       "Led product updates, supervised interns, and delivered performant user interfaces. Built scalable applications including a school management system and subscription platform. Collaborated on API integrations, performed code reviews, and implemented optimised SQL queries and unit tests.",
     highlights: [
