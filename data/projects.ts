@@ -17,7 +17,7 @@ export const PROJECTS = [
       "PostgreSQL",
       "Progressive Web App"
     ],
-    link: "https://merchant-plum.vercel.app/",
+    link: "https://getkanti.com/",
     github: null,
     image: "/merchant-pwa.png",
     featured: true
