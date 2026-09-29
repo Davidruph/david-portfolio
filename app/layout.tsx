@@ -8,7 +8,7 @@ import Script from "next/script";
 export const metadata: Metadata = {
   title: "David Agbugba | Software Architect & Team Lead",
   description:
-    "David Agbugba builds and leads the engineering behind ambitious digital products.",
+    "David Agbugba builds business websites, landing pages and custom applications, and leads the engineering behind ambitious digital products.",
   icons: {
     icon: "/favicon.svg"
   }

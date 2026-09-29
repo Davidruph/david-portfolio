@@ -9,7 +9,7 @@ import {
   useTransform
 } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
-import { ArrowDownRight, ArrowUpRight, Github, Linkedin } from "lucide-react";
+import { ArrowDownRight, ArrowUpRight, Github, Linkedin, Plus } from "lucide-react";
 import { PROJECTS } from "@/data/projects";
 
 const projectStories = [
@@ -56,6 +56,11 @@ const projects = PROJECTS.map((project, index) => {
     number: String(index + 1).padStart(2, "0"),
     title: story?.title ?? project.title,
     type: story?.type ?? project.tagline,
+    category: project.tags.includes("WordPress")
+      ? "Business websites"
+      : ["Kanti", "ODORAMALL", "GoKollect"].includes(project.title)
+        ? "Commerce & payments"
+        : "Web applications",
     image: project.image,
     href: project.link,
     github: project.github,
@@ -69,30 +74,36 @@ const projects = PROJECTS.map((project, index) => {
 const capabilities = [
   [
     "01",
+    "Business websites",
+    "Building websites that help businesses present their services, earn trust and turn visitors into enquiries.",
+    "Company websites · Landing pages · Website redesigns"
+  ],
+  [
+    "02",
     "Product",
     "Turning complex ideas into products people can use, understand and come back to.",
     "Discovery · UX systems · SaaS"
   ],
   [
-    "02",
+    "03",
     "Architecture",
     "Choosing the boundaries, data models and foundations that let a product grow without drama.",
     "APIs · Multi-tenancy · Data design"
   ],
   [
-    "03",
+    "04",
     "Engineering",
     "Building interfaces and backend systems with the same attention to reliability and detail.",
     "React · Next.js · Laravel · Node.js"
   ],
   [
-    "04",
+    "05",
     "Applied AI",
     "Putting AI where it makes a workflow meaningfully faster, clearer or more capable.",
     "Integrations · Automations · Intelligence"
   ],
   [
-    "05",
+    "06",
     "Leadership",
     "Giving teams the structure, technical context and momentum to ship thoughtful work.",
     "Code review · Mentoring · Delivery"
@@ -107,75 +118,92 @@ const reveal = {
 
 type Project = (typeof projects)[number];
 
-function ProjectCard({ project, index }: { project: Project; index: number }) {
-  const ref = useRef<HTMLElement>(null);
-  const reducedMotion = useReducedMotion();
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start end", "center center"]
-  });
-  const scale = useTransform(scrollYProgress, [0, 1], [0.92, 1]);
-  const rotateX = useTransform(scrollYProgress, [0, 1], [8, 0]);
+function ProjectCard({ project }: { project: Project }) {
   return (
-    <article ref={ref} className={`project project-${index + 1}`}>
-      <motion.div {...reveal} className="project-heading">
-        <p className="eyebrow">
-          {project.number} / {project.type}
-        </p>
-        <h3>{project.title}</h3>
-        <p className="project-problem">{project.problem}</p>
-        <a
-          href={project.href}
-          target="_blank"
-          rel="noreferrer"
-          className="text-link"
-        >
-          Explore the live product <ArrowUpRight size={16} />
-        </a>
-      </motion.div>
-      <motion.a
-        style={reducedMotion ? undefined : { scale, rotateX }}
+    <article className="gallery-card">
+      <a
         href={project.href}
         target="_blank"
         rel="noreferrer"
-        className="project-image"
+        className="gallery-image"
         aria-label={`Visit ${project.title} (opens in a new tab)`}
       >
-        <div className="browser-bar" aria-hidden="true">
-          <span />
-          <span />
-          <span />
-          <small>{new URL(project.href).hostname}</small>
-        </div>
-        <div className="project-screen">
-          <Image
-            src={project.image}
-            alt={`${project.title} product interface`}
-            fill
-            sizes="(max-width: 767px) calc(100vw - 82px), (max-width: 1184px) calc((100vw - 188px) / 2), 498px"
-          />
-        </div>
-        <span className="project-open">
-          <ArrowUpRight />
-        </span>
-      </motion.a>
-      <motion.div {...reveal} className="project-details">
-        <p className="project-contribution">
-          <b>{project.detailLabel}</b> {project.contribution}
-        </p>
-        <p className="project-stack">{project.stack}</p>
-        {project.github && (
-          <a
-            href={project.github}
-            target="_blank"
-            rel="noreferrer"
-            className="text-link"
-          >
-            <Github size={15} /> View source <ArrowUpRight size={14} />
-          </a>
-        )}
-      </motion.div>
+        <Image
+          src={project.image}
+          alt={`${project.title} website preview`}
+          fill
+          sizes="(max-width: 767px) calc(100vw - 40px), (max-width: 1100px) 45vw, 355px"
+        />
+        <span className="gallery-visit">Visit site <ArrowUpRight size={16} /></span>
+      </a>
+      <div className="gallery-body">
+        <p className="gallery-category">{project.category}</p>
+        <h3>{project.title}</h3>
+        <p className="gallery-caption">{project.type}</p>
+        <details className="gallery-details">
+          <summary>
+            Inside the project <Plus size={16} aria-hidden="true" />
+          </summary>
+          <div className="gallery-story">
+            <p>{project.problem}</p>
+            <p><strong>{project.detailLabel}</strong> {project.contribution}</p>
+            <p className="gallery-stack">{project.stack}</p>
+            {project.github && (
+              <a href={project.github} target="_blank" rel="noreferrer" className="text-link">
+                <Github size={15} /> View source <ArrowUpRight size={14} />
+              </a>
+            )}
+          </div>
+        </details>
+      </div>
     </article>
+  );
+}
+
+const projectFilters = ["All work", "Business websites", "Commerce & payments", "Web applications"];
+
+function ProjectGallery() {
+  const [filter, setFilter] = useState("All work");
+  const [showAll, setShowAll] = useState(false);
+  const filtered = projects.filter((project) => filter === "All work" || project.category === filter);
+  const visible = showAll ? filtered : filtered.slice(0, 6);
+
+  return (
+    <section id="work" className="work section">
+      <div className="page-width">
+        <div className="gallery-heading">
+          <div>
+            <p className="eyebrow">Selected work / {projects.length} projects</p>
+            <h2>Ideas, <em>in action.</em></h2>
+          </div>
+          <p>Websites that mean business.<br />Products that solve real problems.</p>
+        </div>
+        <div className="gallery-filters" role="group" aria-label="Filter projects">
+          {projectFilters.map((label) => (
+            <button
+              key={label}
+              type="button"
+              aria-pressed={filter === label}
+              onClick={() => { setFilter(label); setShowAll(false); }}
+            >
+              {label}
+              <span>{label === "All work" ? projects.length : projects.filter((project) => project.category === label).length}</span>
+            </button>
+          ))}
+        </div>
+        <p className="gallery-count" role="status">Showing {visible.length} of {filtered.length} projects</p>
+        <div className="gallery-grid" key={filter}>
+          {visible.map((project) => <ProjectCard key={project.number} project={project} />)}
+        </div>
+        {!showAll && filtered.length > 6 && (
+          <div className="gallery-more">
+            <button type="button" className="primary-link" onClick={() => setShowAll(true)}>
+              Explore all {filtered.length} projects <ArrowDownRight size={17} />
+            </button>
+          </div>
+        )}
+      </div>
+    </section>
   );
 }
 
@@ -354,15 +382,15 @@ function Hero() {
           <em>Beautifully built.</em>
         </motion.h1>
         <motion.p {...reveal} className="hero-description">
-          Thoughtful interfaces. Dependable systems.
-          <br />I build the software that brings it all together.
+          Business websites. Custom applications. Dependable systems.
+          <br />I help businesses show up online and bring ambitious ideas to life.
         </motion.p>
         <motion.div {...reveal} className="hero-actions">
           <a href="#work" className="primary-link">
             Explore my work <ArrowDownRight size={17} />
           </a>
-          <a href="#story" className="text-link">
-            A little about me <ArrowUpRight size={17} />
+          <a href="#contact" className="text-link">
+            Let&apos;s build your website <ArrowUpRight size={17} />
           </a>
         </motion.div>
         <HeroProjectOrbit />
@@ -393,6 +421,11 @@ export default function Home() {
               early sketch to a dependable release.
             </p>
             <p>
+              I also build websites for businesses, from company websites and
+              landing pages to redesigns that make services clearer and help
+              customers get in touch.
+            </p>
+            <p>
               My practice moves easily between interface detail and backend
               architecture: SaaS platforms, payment systems, APIs, real-time
               applications and useful AI integrations. The through-line is
@@ -404,27 +437,7 @@ export default function Home() {
           </div>
         </motion.div>
       </section>
-      <section id="work" className="work section">
-        <div className="page-width work-heading">
-          <motion.p {...reveal} className="eyebrow">
-            All projects / {projects.length} products
-          </motion.p>
-          <motion.h2 {...reveal}>
-            Systems in the
-            <br />
-            <em>real world.</em>
-          </motion.h2>
-        </div>
-        <div className="page-width project-grid">
-          {projects.map((project, index) => (
-            <ProjectCard
-              key={`project-${project.number}`}
-              project={project}
-              index={index}
-            />
-          ))}
-        </div>
-      </section>
+      <ProjectGallery />
       <section id="thinking" className="capabilities section page-width">
         <motion.div {...reveal} className="capability-intro">
           <p className="eyebrow">How I build</p>
@@ -507,9 +520,10 @@ export default function Home() {
           </motion.h2>
           <motion.div {...reveal} className="contact-row">
             <p>
-              Whether it needs a stronger technical foundation, a product-minded
-              engineering partner or a team to move with more clarity, I&apos;d
-              like to hear about it.
+              Need a website for your business, a refresh of your existing site
+              or a custom application? Tell me what you do and what you want to
+              build. I also partner with teams on architecture and product
+              engineering.
             </p>
             <a href="mailto:dagbugba@yahoo.com" className="contact-email">
               dagbugba
