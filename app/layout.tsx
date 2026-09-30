@@ -6,7 +6,7 @@ import Footer from "@/components/layout/footer";
 import Script from "next/script";
 
 export const metadata: Metadata = {
-  title: "David Agbugba | Software Architect & Team Lead",
+  title: "David Agbugba | Software Architect/Developer",
   description:
     "David Agbugba builds business websites, landing pages and custom applications, and leads the engineering behind ambitious digital products.",
   icons: {
