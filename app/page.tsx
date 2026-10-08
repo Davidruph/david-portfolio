@@ -9,7 +9,13 @@ import {
   useTransform
 } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
-import { ArrowDownRight, ArrowUpRight, Github, Linkedin, Plus } from "lucide-react";
+import {
+  ArrowDownRight,
+  ArrowUpRight,
+  Github,
+  Linkedin,
+  Plus
+} from "lucide-react";
 import { PROJECTS } from "@/data/projects";
 
 const projectStories = [
@@ -56,11 +62,12 @@ const projects = PROJECTS.map((project, index) => {
     number: String(index + 1).padStart(2, "0"),
     title: story?.title ?? project.title,
     type: story?.type ?? project.tagline,
-    category: project.tags.includes("WordPress")
-      ? "Business websites"
-      : ["Kanti", "ODORAMALL", "GoKollect"].includes(project.title)
-        ? "Commerce & payments"
-        : "Web applications",
+    category:
+      (project.category ?? project.tags.includes("WordPress"))
+        ? "Business websites"
+        : ["Kanti", "ODORAMALL", "GoKollect"].includes(project.title)
+          ? "Commerce & payments"
+          : "Web applications",
     image: project.image,
     href: project.link,
     github: project.github,
@@ -134,7 +141,9 @@ function ProjectCard({ project }: { project: Project }) {
           fill
           sizes="(max-width: 767px) calc(100vw - 40px), (max-width: 1100px) 45vw, 355px"
         />
-        <span className="gallery-visit">Visit site <ArrowUpRight size={16} /></span>
+        <span className="gallery-visit">
+          Visit site <ArrowUpRight size={16} />
+        </span>
       </a>
       <div className="gallery-body">
         <p className="gallery-category">{project.category}</p>
@@ -146,10 +155,17 @@ function ProjectCard({ project }: { project: Project }) {
           </summary>
           <div className="gallery-story">
             <p>{project.problem}</p>
-            <p><strong>{project.detailLabel}</strong> {project.contribution}</p>
+            <p>
+              <strong>{project.detailLabel}</strong> {project.contribution}
+            </p>
             <p className="gallery-stack">{project.stack}</p>
             {project.github && (
-              <a href={project.github} target="_blank" rel="noreferrer" className="text-link">
+              <a
+                href={project.github}
+                target="_blank"
+                rel="noreferrer"
+                className="text-link"
+              >
                 <Github size={15} /> View source <ArrowUpRight size={14} />
               </a>
             )}
@@ -160,12 +176,19 @@ function ProjectCard({ project }: { project: Project }) {
   );
 }
 
-const projectFilters = ["All work", "Business websites", "Commerce & payments", "Web applications"];
+const projectFilters = [
+  "All work",
+  "Business websites",
+  "Commerce & payments",
+  "Web applications"
+];
 
 function ProjectGallery() {
   const [filter, setFilter] = useState("All work");
   const [showAll, setShowAll] = useState(false);
-  const filtered = projects.filter((project) => filter === "All work" || project.category === filter);
+  const filtered = projects.filter(
+    (project) => filter === "All work" || project.category === filter
+  );
   const visible = showAll ? filtered : filtered.slice(0, 6);
 
   return (
@@ -173,32 +196,61 @@ function ProjectGallery() {
       <div className="page-width">
         <div className="gallery-heading">
           <div>
-            <p className="eyebrow">Selected work / {projects.length} projects</p>
-            <h2>Ideas, <em>in action.</em></h2>
+            <p className="eyebrow">
+              Selected work / {projects.length} projects
+            </p>
+            <h2>
+              Ideas, <em>in action.</em>
+            </h2>
           </div>
-          <p>Websites that mean business.<br />Products that solve real problems.</p>
+          <p>
+            Websites that mean business.
+            <br />
+            Products that solve real problems.
+          </p>
         </div>
-        <div className="gallery-filters" role="group" aria-label="Filter projects">
+        <div
+          className="gallery-filters"
+          role="group"
+          aria-label="Filter projects"
+        >
           {projectFilters.map((label) => (
             <button
               key={label}
               type="button"
               aria-pressed={filter === label}
-              onClick={() => { setFilter(label); setShowAll(false); }}
+              onClick={() => {
+                setFilter(label);
+                setShowAll(false);
+              }}
             >
               {label}
-              <span>{label === "All work" ? projects.length : projects.filter((project) => project.category === label).length}</span>
+              <span>
+                {label === "All work"
+                  ? projects.length
+                  : projects.filter((project) => project.category === label)
+                      .length}
+              </span>
             </button>
           ))}
         </div>
-        <p className="gallery-count" role="status">Showing {visible.length} of {filtered.length} projects</p>
+        <p className="gallery-count" role="status">
+          Showing {visible.length} of {filtered.length} projects
+        </p>
         <div className="gallery-grid" key={filter}>
-          {visible.map((project) => <ProjectCard key={project.number} project={project} />)}
+          {visible.map((project) => (
+            <ProjectCard key={project.number} project={project} />
+          ))}
         </div>
         {!showAll && filtered.length > 6 && (
           <div className="gallery-more">
-            <button type="button" className="primary-link" onClick={() => setShowAll(true)}>
-              Explore all {filtered.length} projects <ArrowDownRight size={17} />
+            <button
+              type="button"
+              className="primary-link"
+              onClick={() => setShowAll(true)}
+            >
+              Explore all {filtered.length} projects{" "}
+              <ArrowDownRight size={17} />
             </button>
           </div>
         )}
@@ -383,7 +435,8 @@ function Hero() {
         </motion.h1>
         <motion.p {...reveal} className="hero-description">
           Business websites. Custom applications. Dependable systems.
-          <br />I help businesses show up online and bring ambitious ideas to life.
+          <br />I help businesses show up online and bring ambitious ideas to
+          life.
         </motion.p>
         <motion.div {...reveal} className="hero-actions">
           <a href="#work" className="primary-link">

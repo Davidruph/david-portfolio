@@ -1,5 +1,23 @@
 export const PROJECTS = [
   {
+    title: "iXL Construction Limited",
+    category: "Business websites",
+    tagline: "Modern construction website with interactive 3D experience",
+    description:
+      "Designed and developed a modern corporate website for a Nigerian building and structural steel construction company. Features an interactive 3D building experience, responsive layouts, project showcases, service pages, and an enquiry system with spam protection.",
+    metrics: [
+      "Interactive 3D building experience",
+      "Responsive corporate website",
+      "Project portfolio & service showcases",
+      "Enquiry forms with spam protection"
+    ],
+    tags: ["Next.js", "TypeScript", "React", "Three.js", "Tailwind CSS"],
+    link: "https://ixlconstruction.com/",
+    github: null,
+    image: "/ixl-construction.png",
+    featured: true
+  },
+  {
     title: "Kanti",
     tagline: "WhatsApp-first order & payments platform for small businesses",
     description:
