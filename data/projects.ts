@@ -18,6 +18,33 @@ export const PROJECTS = [
     featured: true
   },
   {
+    title: "Awning Warehouse Nigeria",
+    category: "Business websites",
+    tagline:
+      "Animated awning & pergola website with a custom CMS and quote system",
+    description:
+      "Designed and developed a custom website for a Lagos-based awning and pergola company that ships nationwide, replacing a Wix template. Built around an 'engineered shade' concept with hard-edged slat shadows and scroll animations, it includes an interactive Nigeria coverage map, a showroom street map, a filterable project gallery, and a quote form with photo uploads that sends branded emails. All content is managed in an embedded Sanity Studio, with instant publishing, draft previews and auto-generated social share cards.",
+    metrics: [
+      "Sanity CMS with instant publishing & live previews",
+      "Quote form with photo uploads & branded email delivery",
+      "Interactive Nigeria coverage map & showroom street map",
+      "100 Lighthouse scores for Accessibility, SEO & Best Practices"
+    ],
+    tags: [
+      "Next.js",
+      "TypeScript",
+      "Sanity",
+      "Tailwind CSS",
+      "Motion",
+      "MapLibre"
+    ],
+    link: "https://awning-warehouse.vercel.app/",
+    github: null,
+    image: "/awning-warehouse.png",
+    featured: true
+  },
+
+  {
     title: "Kanti",
     tagline: "WhatsApp-first order & payments platform for small businesses",
     description:
