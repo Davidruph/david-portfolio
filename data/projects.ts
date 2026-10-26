@@ -38,7 +38,7 @@ export const PROJECTS = [
       "Motion",
       "MapLibre"
     ],
-    link: "https://awning-warehouse.vercel.app/",
+    link: "https://www.awningwarehouseng.com/",
     github: null,
     image: "/awning-warehouse.png",
     featured: true
