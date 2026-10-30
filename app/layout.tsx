@@ -5,12 +5,34 @@ import Navbar from "@/components/layout/navbar";
 import Footer from "@/components/layout/footer";
 import Script from "next/script";
 
+const siteUrl =
+  process.env.NEXT_PUBLIC_SITE_URL ??
+  (process.env.VERCEL_PROJECT_PRODUCTION_URL
+    ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
+    : "http://localhost:3000");
+
+const title = "David Agbugba | Software Architect/Developer";
+const description =
+  "David Agbugba builds business websites, landing pages and custom applications, and leads the engineering behind ambitious digital products.";
+
 export const metadata: Metadata = {
-  title: "David Agbugba | Software Architect/Developer",
-  description:
-    "David Agbugba builds business websites, landing pages and custom applications, and leads the engineering behind ambitious digital products.",
+  metadataBase: new URL(siteUrl),
+  title,
+  description,
   icons: {
     icon: "/favicon.svg"
+  },
+  openGraph: {
+    type: "website",
+    url: "/",
+    siteName: "David Agbugba",
+    title,
+    description
+  },
+  twitter: {
+    card: "summary_large_image",
+    title,
+    description
   }
 };
 
